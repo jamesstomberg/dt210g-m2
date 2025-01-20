@@ -10,8 +10,9 @@ export default function Card({
     return (
         <div className="site-content__card">
             <div className="site-content__card-title-container">
-                <div className="site-content__card-delete-button-container">
-                    <button className="site-content__card-button">X</button>
+                <div className="site-content__card-top-button-container">
+                    <button className="site-content__card-button site-content__card-button--edit">/</button>
+                    <button className="site-content__card-button site-content__card-button--delete">X</button>
                 </div>
                 <h2>{title}</h2>
             </div>

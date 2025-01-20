@@ -38,14 +38,10 @@
     }
 
     .site-content__card-title-container {
-        .site-content__card-delete-button-container {
+        .site-content__card-top-button-container {
             display: flex;
             justify-content: flex-end;
-
-            button {
-                background-color: #333;
-                color: #fff;
-            }
+            gap: 0.2rem;
         }
     }
 
@@ -54,7 +50,7 @@
         border: none;
         border-radius: 100%;
         padding: 0.3rem 0.5rem;
-        transition: opacity 0.3s ease-in;
+        transition: all 0.2s ease-in;
 
         &:hover {
             opacity: 0.8;
@@ -79,6 +75,17 @@
 
         &.site-content__card-button--completed {
             background-color: green;
+        }
+
+        &.site-content__card-button--delete,
+        &.site-content__card-button--edit {
+            background-color: #333;
+            color: #fff;
+
+            &:hover {
+                opacity: 1;
+                background-color: #000;
+            }
         }
     }
 
