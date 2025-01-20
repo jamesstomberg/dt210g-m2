@@ -16,19 +16,69 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s, box-shadow 0.3s;
         text-align: center;
+        padding: 1rem;
 
         &:hover {
             transform: translateY(-5px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-            cursor: pointer;
         }
 
         // Text styles.
         p {
             margin: 0;
-            padding: 1rem;
             font-size: 1rem;
             color: #333;
+        }
+    }
+
+    .site-content__card-buttons-container {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+    }
+
+    .site-content__card-title-container {
+        .site-content__card-delete-button-container {
+            display: flex;
+            justify-content: flex-end;
+
+            button {
+                background-color: #333;
+                color: #fff;
+            }
+        }
+    }
+
+    .site-content__card-button {
+        cursor: pointer;
+        border: none;
+        border-radius: 100%;
+        padding: 0.3rem 0.5rem;
+        transition: opacity 0.3s ease-in;
+
+        &:hover {
+            opacity: 0.8;
+        }
+
+        &.site-content__card-button--inactive {
+            opacity: 0.5;
+            background-color: #ddd;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+
+        &.site-content__card-button--onhold {
+            background-color: red;
+        }
+
+        &.site-content__card-button--inprogress {
+            background-color: yellow;
+        }
+
+        &.site-content__card-button--completed {
+            background-color: green;
         }
     }
 
