@@ -1,0 +1,13 @@
+footer {
+    background-color: #000;
+    color: #fff;
+
+    .footer__inner {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        max-width: var(--content-width);
+        margin: 0 auto;
+        padding: 0.5rem 1rem;
+    }
+}
