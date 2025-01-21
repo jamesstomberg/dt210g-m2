@@ -5,10 +5,12 @@ export default function Card({
     todo,
     setIsEditingTodo,
     setCurrentTodo,
+    setIsAddingTodo,
 }: {
     todo: any;
     setIsEditingTodo: any;
     setCurrentTodo: any;
+    setIsAddingTodo: any;
 }) {
     return (
         <div className="site-content__card">
@@ -18,6 +20,7 @@ export default function Card({
                         className="site-content__card-button site-content__card-button--edit"
                         onClick={() => {
                             setIsEditingTodo(true);
+                            setIsAddingTodo(false);
                             setCurrentTodo(todo);
                         }}
                     >
@@ -33,13 +36,25 @@ export default function Card({
                 <h4>Status</h4>
 
                 <div className="site-content__card-buttons-container">
-                    <button className="site-content__card-button site-content__card-button--onhold site-content__card-button--inactive">
+                    <button
+                        className={`site-content__card-button site-content__card-button--onhold ${
+                            !todo.status.onhold ? 'site-content__card-button--inactive' : ''
+                        }`}
+                    >
                         P
                     </button>
-                    <button className="site-content__card-button site-content__card-button--inprogress site-content__card-button--inactive">
+                    <button
+                        className={`site-content__card-button site-content__card-button--inprogress ${
+                            !todo.status.inprogress ? 'site-content__card-button--inactive' : ''
+                        }`}
+                    >
                         S
                     </button>
-                    <button className="site-content__card-button site-content__card-button--completed site-content__card-button--inactive">
+                    <button
+                        className={`site-content__card-button site-content__card-button--completed ${
+                            !todo.status.completed ? 'site-content__card-button--inactive' : ''
+                        }`}
+                    >
                         C
                     </button>
                 </div>

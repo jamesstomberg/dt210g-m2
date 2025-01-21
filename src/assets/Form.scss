@@ -25,4 +25,14 @@
         flex-wrap: wrap;
         gap: 0.5rem;
     }
+
+    .edit-todo-buttons {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: flex-end;
+
+        input {
+            margin: 0;
+        }
+    }
 }

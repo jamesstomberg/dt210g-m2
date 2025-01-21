@@ -2,7 +2,17 @@ import Card from './Card';
 import '../assets/Cards.scss';
 import { useState } from 'react';
 
-export default function Cards({ todos, setIsEditingTodo, setCurrentTodo }: { todos: any[], setIsEditingTodo: any, setCurrentTodo: any }) {
+export default function Cards({
+    todos,
+    setIsEditingTodo,
+    setCurrentTodo,
+    setIsAddingTodo,
+}: {
+    todos: any[];
+    setIsEditingTodo: any;
+    setCurrentTodo: any;
+    setIsAddingTodo: any;
+}) {
     return (
         <div className="site-content__cards">
             {todos.map((todo, index) => (
@@ -11,6 +21,7 @@ export default function Cards({ todos, setIsEditingTodo, setCurrentTodo }: { tod
                     todo={todo}
                     setIsEditingTodo={setIsEditingTodo}
                     setCurrentTodo={setCurrentTodo}
+                    setIsAddingTodo={setIsAddingTodo}
                 />
             ))}
         </div>

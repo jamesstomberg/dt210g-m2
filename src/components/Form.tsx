@@ -15,10 +15,12 @@ export default function Form({
     setTodos,
     currentTodo = {},
     isEditingTodo,
+    setIsEditingTodo,
 }: {
     setTodos: React.Dispatch<React.SetStateAction<any[]>>;
     currentTodo: object;
     isEditingTodo: boolean;
+    setIsEditingTodo: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
     const [todo, setTodo] = useState<ToDo>({
         title: '',
@@ -59,12 +61,16 @@ export default function Form({
     };
 
     const handleEditTodo = async (e: any) => {
+        e.preventDefault();
         console.log('edited');
-    }
+        console.log(currentTodo);
+    };
 
     const handleDeleteTodo = async (e: any) => {
+        e.preventDefault();
         console.log('delete todo');
-    }
+        console.log(currentTodo);
+    };
 
     return (
         <form id="addTodoForm">
@@ -132,13 +138,42 @@ export default function Form({
                 </div>
             </fieldset>
 
-            <input
-                type="submit"
-                value="Lägg till"
-                onClick={(e) => {
-                    handleAddTodo(e);
-                }}
-            />
+            {!isEditingTodo && (
+                <input
+                    type="submit"
+                    value="Lägg till"
+                    onClick={(e) => {
+                        handleAddTodo(e);
+                    }}
+                />
+            )}
+
+            {isEditingTodo && (
+                <div className="edit-todo-buttons">
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setIsEditingTodo(false);
+                        }}
+                    >
+                        Stäng
+                    </button>
+                    <input
+                        type="submit"
+                        value="Ta bort"
+                        onClick={(e) => {
+                            handleDeleteTodo(e);
+                        }}
+                    />
+                    <input
+                        type="submit"
+                        value="Uppdatera"
+                        onClick={(e) => {
+                            handleEditTodo(e);
+                        }}
+                    />
+                </div>
+            )}
         </form>
     );
 }

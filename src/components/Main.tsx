@@ -1,7 +1,7 @@
 import '../assets/Main.scss';
 import Cards from './Cards';
 import Form from './Form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Main({ title }: { title: string }) {
     const [todos, setTodos] = useState([
@@ -18,9 +18,9 @@ export default function Main({ title }: { title: string }) {
             title: 'todo 2',
             description: 'en beskrivning',
             status: {
-                onhold: true,
+                onhold: false,
                 inprogress: false,
-                completed: false,
+                completed: true,
             },
         },
     ]);
@@ -46,6 +46,7 @@ export default function Main({ title }: { title: string }) {
                     <button
                         onClick={() => {
                             setIsAddingTodo(!isAddingTodo);
+                            setIsEditingTodo(false);
                         }}
                     >
                         {isAddingTodo ? '-' : '+'}
@@ -64,11 +65,21 @@ export default function Main({ title }: { title: string }) {
 
                 {isEditingTodo && (
                     <div style={{ maxWidth: '500px' }}>
-                        <Form setTodos={setTodos} currentTodo={currentTodo} isEditingTodo={isEditingTodo} />
+                        <Form
+                            setTodos={setTodos}
+                            currentTodo={currentTodo}
+                            isEditingTodo={isEditingTodo}
+                            setIsEditingTodo={setIsEditingTodo}
+                        />
                     </div>
                 )}
 
-                <Cards todos={todos} setIsEditingTodo={setIsEditingTodo} setCurrentTodo={setCurrentTodo} />
+                <Cards
+                    todos={todos}
+                    setIsEditingTodo={setIsEditingTodo}
+                    setCurrentTodo={setCurrentTodo}
+                    setIsAddingTodo={setIsAddingTodo}
+                />
             </section>
         </main>
     );
