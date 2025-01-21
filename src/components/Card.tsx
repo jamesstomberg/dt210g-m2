@@ -1,26 +1,36 @@
+import SvgLogo from './SvgLogo';
+import editLogo from '../assets/images/pen-to-square-solid.svg';
+
 export default function Card({
-    title,
-    description,
-    status,
+    todo,
+    setIsEditingTodo,
+    setCurrentTodo,
 }: {
-    title: string;
-    description: string;
-    status: object;
+    todo: any;
+    setIsEditingTodo: any;
+    setCurrentTodo: any;
 }) {
     return (
         <div className="site-content__card">
             <div className="site-content__card-title-container">
                 <div className="site-content__card-top-button-container">
-                    <button className="site-content__card-button site-content__card-button--edit">/</button>
-                    <button className="site-content__card-button site-content__card-button--delete">X</button>
+                    <button
+                        className="site-content__card-button site-content__card-button--edit"
+                        onClick={() => {
+                            setIsEditingTodo(true);
+                            setCurrentTodo(todo);
+                        }}
+                    >
+                        <SvgLogo src={editLogo} className="edit-logo" alt="Edit Logo" />
+                    </button>
                 </div>
-                <h2>{title}</h2>
+                <h3>{todo.title}</h3>
             </div>
             <div className="site-content__card-inner-container">
-                <p>{description}</p>
+                <p>{todo.description}</p>
             </div>
             <div>
-                <h3>Status</h3>
+                <h4>Status</h4>
 
                 <div className="site-content__card-buttons-container">
                     <button className="site-content__card-button site-content__card-button--onhold site-content__card-button--inactive">

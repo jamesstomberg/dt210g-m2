@@ -2,8 +2,12 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 1rem;
+
+    .edit-logo {
+        width: 10px;
+    }
 
     .site-content__card {
         flex: 1 1 calc(33.33% - 1rem);

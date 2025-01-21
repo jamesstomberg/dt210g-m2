@@ -1,0 +1,28 @@
+#addTodoForm {
+    padding: 0.5rem;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+
+    input[type=submit] {
+        margin-right: 0;
+        margin-left: auto;
+    }
+
+    fieldset {
+        border: none;
+        display: flex;
+        flex-direction: column;
+
+        input[type=text], textarea {
+            max-width: 400px;
+        }
+    }
+
+    #radioGroup {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+}

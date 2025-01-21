@@ -2,16 +2,17 @@ import Card from './Card';
 import '../assets/Cards.scss';
 import { useState } from 'react';
 
-export default function Cards() {
-    const [statuses, setStatuses] = useState([]);
-
+export default function Cards({ todos, setIsEditingTodo, setCurrentTodo }: { todos: any[], setIsEditingTodo: any, setCurrentTodo: any }) {
     return (
         <div className="site-content__cards">
-            {/*<Card key={index} src={src} alt={alt} title={title} />;*/}
-            <Card title="En todo" description="en beskrivning" status={{}} />
-            <Card title="En todo" description="en beskrivning" status={{}} />
-            <Card title="En todo" description="en beskrivning" status={{}} />
-            <Card title="En todo" description="en beskrivning" status={{}} />
+            {todos.map((todo, index) => (
+                <Card
+                    key={index}
+                    todo={todo}
+                    setIsEditingTodo={setIsEditingTodo}
+                    setCurrentTodo={setCurrentTodo}
+                />
+            ))}
         </div>
     );
 }
