@@ -1,15 +1,8 @@
 import '../assets/Form.scss';
 import { useState, useEffect } from 'react';
-
-interface ToDo {
-    title: string;
-    description: string;
-    status: {
-        onhold: boolean;
-        inprogress: boolean;
-        completed: boolean;
-    };
-}
+import { ToDo } from '../interfaces/ToDo';
+import axios from 'axios';
+import { getApiRoute } from '../utils/functions';
 
 export default function Form({
     setTodos,
@@ -18,11 +11,12 @@ export default function Form({
     setIsEditingTodo,
 }: {
     setTodos: React.Dispatch<React.SetStateAction<any[]>>;
-    currentTodo: object;
+    currentTodo: ToDo;
     isEditingTodo: boolean;
     setIsEditingTodo: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
     const [todo, setTodo] = useState<ToDo>({
+        id: null,
         title: '',
         description: '',
         status: { onhold: false, inprogress: false, completed: false },
@@ -34,6 +28,7 @@ export default function Form({
 
     useEffect(() => {
         setTodo({
+            id: null,
             title,
             description,
             status,
@@ -52,12 +47,30 @@ export default function Form({
         // Validate formdata.
 
         // Send data to API.
+        const createUrl = getApiRoute('/Create/');
 
-        // If response is OK, update todos with response from API / current Todo.
-        if (true) {
-            setTodos((prevTodos) => [...prevTodos, todo]);
-        }
-        console.log(todo);
+        axios
+            .post(createUrl, {
+                title: todo.title,
+                description: todo.description,
+                status: todo.status,
+            })
+            .then(function (response) {
+                // If response is OK, update todos with response from API / current Todo.
+                if (response.status === 200) {
+                    setTodos((prevTodos) => [...prevTodos, {
+                        ...todo,
+                        id: response.data[0].id
+                    }]);
+
+                    setTitle('');
+                }
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+                alert('Något gick fel! Kunde inte lägga till ny ToDo');
+            });
     };
 
     const handleEditTodo = async (e: any) => {
@@ -82,7 +95,7 @@ export default function Form({
                     type="text"
                     name="title"
                     id="title"
-                    value={title}
+                    value={currentTodo.title}
                     onChange={(e) => setTitle(e.target.value)}
                 />
             </fieldset>

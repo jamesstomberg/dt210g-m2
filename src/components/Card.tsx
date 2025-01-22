@@ -22,6 +22,11 @@ export default function Card({
                             setIsEditingTodo(true);
                             setIsAddingTodo(false);
                             setCurrentTodo(todo);
+                            console.log(todo);
+                            window.scrollTo({
+                                top: 0,
+                                behavior: 'smooth',
+                            });
                         }}
                     >
                         <SvgLogo src={editLogo} className="edit-logo" alt="Edit Logo" />

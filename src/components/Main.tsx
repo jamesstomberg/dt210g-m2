@@ -2,28 +2,46 @@ import '../assets/Main.scss';
 import Cards from './Cards';
 import Form from './Form';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { ToDo } from '../interfaces/ToDo';
+import { getApiRoute } from '../utils/functions';
 
 export default function Main({ title }: { title: string }) {
-    const [todos, setTodos] = useState([
-        {
-            title: 'todo 1',
-            description: 'en beskrivning',
-            status: {
-                onhold: true,
-                inprogress: false,
-                completed: false,
-            },
-        },
-        {
-            title: 'todo 2',
-            description: 'en beskrivning',
-            status: {
-                onhold: false,
-                inprogress: false,
-                completed: true,
-            },
-        },
-    ]);
+    const [todos, setTodos] = useState<ToDo[]>([]);
+
+    const getTodos = async () => {
+        const getUrl = getApiRoute('/Read/');
+
+        axios
+            .get(getUrl)
+            .then(function (response) {
+                setTodos((prevTodos) => [
+                    ...prevTodos,
+                    ...response.data.map((todo: ToDo) => {
+                        return {
+                            id: todo.id,
+                            title: todo.title,
+                            description: todo.description,
+                            status:
+                                typeof todo.status === 'string'
+                                    ? JSON.parse(todo.status)
+                                    : todo.status,
+                        };
+                    }),
+                ]);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            .finally(function () {
+                // always executed
+            });
+    };
+
+    useEffect(() => {
+        getTodos();
+    }, []);
 
     const [isAddingTodo, setIsAddingTodo] = useState(false);
     const [isEditingTodo, setIsEditingTodo] = useState(false);
