@@ -1,50 +1,21 @@
-# React + TypeScript + Vite
+# DT210G - Moment 2
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Skapa en ToDo-applikation med React och TypeScript som hanterar dynamisk data i kommunikation med ett separat Back-End API.
 
-Currently, two official plugins are available:
+## Information
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Länk till publicerad webbplats på Netlify: https://celadon-muffin-970f91.netlify.app/
+- Länk till Github-repo för uppgiften: https://github.com/jamesstomberg/dt210g-m2
+- Kuriosa: länk till Backend API (WordPress med egen posttyp "todo" och egna REST-routes): https://test.skovdebowling.se/wp-json/todo-open-api/v1/
+-- /Read/
+-- /Create/
+-- /Update/
+-- /Delete/
 
-## Expanding the ESLint configuration
+## Beskrivning
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Uppgiften består av en Front-End applikation skapad med hjälp av React, TypeScript och Vite. Denna kommunicerar med ett Back-End API baserat på WordPress för att kunna skapa, hantera, redigera och radera ToDo:s (Att-göra-uppgifter).
 
-- Configure the top-level `parserOptions` property like this:
+## Kommentarer
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+Gränssnittet lämnar lite att önska. Bör ha strukturerat komponenterna annorlunda och/eller dragit nytta av Context API. Det hade blivit besvärligt att vidareutveckla denna applikation.
