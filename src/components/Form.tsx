@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { ToDo } from '../interfaces/ToDo';
 import axios from 'axios';
 import { getApiRoute } from '../utils/functions';
+import { object, string, boolean } from 'yup';
 
 export default function Form({
     setTodos,
@@ -26,6 +27,8 @@ export default function Form({
     const [description, setDescription] = useState('');
     const [status, setStatus] = useState({ onhold: true, inprogress: false, completed: false });
 
+    const [formErrors, setFormErrors] = useState([]);
+
     useEffect(() => {
         setTodo({
             id: null,
@@ -41,20 +44,59 @@ export default function Form({
         }
     });
 
+    const todoSchema = object({
+        title: string()
+            .required('En ToDo måste ha en titel')
+            .min(3, 'Titel måste vara minst 3 tecken'),
+        description: string().max(200, 'Beskrivning får vara max 200 tecken'),
+        status: object({
+            onhold: boolean().required(),
+            inprogress: boolean().required(),
+            completed: boolean().required(),
+        })
+            .required()
+            .test('one-true', 'En todo kan bara ha en status och måste ha en status', (status) => {
+                if (!status) {
+                    return false;
+                }
+
+                const trueCount = Object.values(status).filter(Boolean).length;
+
+                return trueCount === 1;
+            }),
+    });
+
     const handleAddTodo = async (e: any) => {
         e.preventDefault();
 
+        const formData = {
+            title: todo.title,
+            description: todo.description,
+            status: todo.status,
+        };
+
+        let validated = false;
+
         // Validate formdata.
+        await todoSchema
+            .validate(formData, { abortEarly: false })
+            .then(() => {
+                setFormErrors([]);
+                validated = true;
+            })
+            .catch((err) => {
+                setFormErrors(err.errors);
+            });
+
+        if (!validated) {
+            return;
+        }
 
         // Send data to API.
         const createUrl = getApiRoute('/Create/');
 
         axios
-            .post(createUrl, {
-                title: todo.title,
-                description: todo.description,
-                status: todo.status,
-            })
+            .post(createUrl, formData)
             .then(function (response) {
                 // If response is OK, update todos with response from API / current Todo.
                 if (response.status === 200) {
@@ -95,6 +137,12 @@ export default function Form({
         <form id="addTodoForm">
             <h4>{isEditingTodo ? 'Redigera todo' : 'Lägg till ny todo'}</h4>
 
+            <ul>
+                {formErrors.map((formError, index) => {
+                    return <li key={index} style={{ color: 'red' }}>{formError}</li>;
+                })}
+            </ul>
+
             <fieldset>
                 <label htmlFor="title">Titel</label>
                 <input
@@ -106,7 +154,7 @@ export default function Form({
                 />
             </fieldset>
             <fieldset>
-                <label htmlFor="description">Description</label>
+                <label htmlFor="description">Beskrivning</label>
                 <textarea
                     name="description"
                     id="description"
