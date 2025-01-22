@@ -19,3 +19,7 @@ Uppgiften består av en Front-End applikation skapad med hjälp av React, TypeSc
 ## Kommentarer
 
 Gränssnittet lämnar lite att önska. Bör ha strukturerat komponenterna annorlunda och/eller dragit nytta av Context API. Det hade blivit besvärligt att vidareutveckla denna applikation.
+
+Borde kanske inte ha använt samma komponent (Form) för att skapa och redigera ToDo:s. Det faktum att jag gjorde det försvårade uppgiften. Alternativt skulle jag ha strukturerat komponenten på ett smartare sätt för att kunna hantera olika scenarier.
+
+Strukturen för att hantera status per ToDo i ett objekt kan också ha varit något onödigt. I efterhand hade jag hellre lagrat det som en siffra eller sträng (tillåtit ett begränsat antal värden både på klient och server) samtidigt som det hade varit lättare att jobba med Front-End.
