@@ -11,7 +11,7 @@ export default function Form({
     setIsEditingTodo,
 }: {
     setTodos: React.Dispatch<React.SetStateAction<any[]>>;
-    currentTodo: ToDo;
+    currentTodo: any;
     isEditingTodo: boolean;
     setIsEditingTodo: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
@@ -58,12 +58,18 @@ export default function Form({
             .then(function (response) {
                 // If response is OK, update todos with response from API / current Todo.
                 if (response.status === 200) {
-                    setTodos((prevTodos) => [...prevTodos, {
-                        ...todo,
-                        id: response.data[0].id
-                    }]);
+                    setTodos((prevTodos) => [
+                        ...prevTodos,
+                        {
+                            ...todo,
+                            id: response.data[0].id,
+                        },
+                    ]);
 
                     setTitle('');
+                    setDescription('');
+                    setStatus({ onhold: true, inprogress: false, completed: false });
+                    alert('Ny ToDo lades till!');
                 }
             })
             .catch(function (error) {
@@ -95,7 +101,7 @@ export default function Form({
                     type="text"
                     name="title"
                     id="title"
-                    value={currentTodo.title}
+                    value={isEditingTodo ? currentTodo.title : title}
                     onChange={(e) => setTitle(e.target.value)}
                 />
             </fieldset>
@@ -105,7 +111,7 @@ export default function Form({
                     name="description"
                     id="description"
                     rows={10}
-                    value={description}
+                    value={isEditingTodo ? currentTodo.description : description}
                     onChange={(e) => setDescription(e.target.value)}
                 ></textarea>
             </fieldset>

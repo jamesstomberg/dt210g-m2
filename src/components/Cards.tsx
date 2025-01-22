@@ -13,18 +13,22 @@ export default function Cards({
     setIsAddingTodo: any;
 }) {
     return (
-        <div className="site-content__cards">
-            {todos.map((todo, index) => {
-                return (
-                    <Card
-                        key={index}
-                        todo={todo}
-                        setIsEditingTodo={setIsEditingTodo}
-                        setCurrentTodo={setCurrentTodo}
-                        setIsAddingTodo={setIsAddingTodo}
-                    />
-                );
-            })}
-        </div>
+        <>
+            <h2>ToDo:s</h2>
+
+            <div className="site-content__cards">
+                {todos.map((todo, index) => {
+                    return (
+                        <Card
+                            key={index}
+                            todo={todo}
+                            setIsEditingTodo={setIsEditingTodo}
+                            setCurrentTodo={setCurrentTodo}
+                            setIsAddingTodo={setIsAddingTodo}
+                        />
+                    );
+                })}
+            </div>
+        </>
     );
 }
