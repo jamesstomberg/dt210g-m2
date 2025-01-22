@@ -259,7 +259,10 @@ export default function Form({
                             value={isEditingTodo ? editTodo.title : title}
                             onChange={(e) => {
                                 setTitle(e.target.value);
-                                editTodo.title = e.target.value;
+                                setEditTodo((prevEditTodo) => ({
+                                    ...prevEditTodo,
+                                    title: e.target.value,
+                                }));
                             }}
                         />
                     </fieldset>
@@ -272,7 +275,10 @@ export default function Form({
                             value={isEditingTodo ? editTodo.description : description}
                             onChange={(e) => {
                                 setDescription(e.target.value);
-                                editTodo.description = e.target.value;
+                                setEditTodo((prevEditTodo) => ({
+                                    ...prevEditTodo,
+                                    description: e.target.value,
+                                }));
                             }}
                         ></textarea>
                     </fieldset>
@@ -293,11 +299,14 @@ export default function Form({
                                     });
 
                                     if (isEditingTodo) {
-                                        editTodo.status = {
-                                            onhold: true,
-                                            inprogress: false,
-                                            completed: false,
-                                        };
+                                        setEditTodo((prevEditTodo) => ({
+                                            ...prevEditTodo,
+                                            status: {
+                                                onhold: true,
+                                                inprogress: false,
+                                                completed: false,
+                                            },
+                                        }));
                                     }
                                 }}
                             />
@@ -320,11 +329,14 @@ export default function Form({
                                     });
 
                                     if (isEditingTodo) {
-                                        editTodo.status = {
-                                            onhold: false,
-                                            inprogress: true,
-                                            completed: false,
-                                        };
+                                        setEditTodo((prevEditTodo) => ({
+                                            ...prevEditTodo,
+                                            status: {
+                                                onhold: false,
+                                                inprogress: true,
+                                                completed: false,
+                                            },
+                                        }));
                                     }
                                 }}
                             />
@@ -347,11 +359,14 @@ export default function Form({
                                     });
 
                                     if (isEditingTodo) {
-                                        editTodo.status = {
-                                            onhold: false,
-                                            inprogress: false,
-                                            completed: true,
-                                        };
+                                        setEditTodo((prevEditTodo) => ({
+                                            ...prevEditTodo,
+                                            status: {
+                                                onhold: false,
+                                                inprogress: false,
+                                                completed: true,
+                                            },
+                                        }));
                                     }
                                 }}
                             />

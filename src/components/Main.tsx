@@ -77,7 +77,13 @@ export default function Main({ title }: { title: string }) {
 
                 {isAddingTodo && (
                     <div style={{ maxWidth: '500px' }}>
-                        <Form setTodos={setTodos} isEditingTodo={isEditingTodo} />
+                        <Form
+                            setTodos={setTodos}
+                            currentTodo={currentTodo}
+                            setCurrentTodo={setCurrentTodo}
+                            isEditingTodo={isEditingTodo}
+                            setIsEditingTodo={setIsEditingTodo}
+                        />
                     </div>
                 )}
 

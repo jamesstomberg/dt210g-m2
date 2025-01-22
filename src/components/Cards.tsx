@@ -1,6 +1,5 @@
 import Card from './Card';
 import '../assets/Cards.scss';
-import { useEffect } from 'react';
 
 export default function Cards({
     todos,
