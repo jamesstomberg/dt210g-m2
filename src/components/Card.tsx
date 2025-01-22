@@ -22,7 +22,6 @@ export default function Card({
                             setIsEditingTodo(true);
                             setIsAddingTodo(false);
                             setCurrentTodo(todo);
-                            console.log(todo);
                             window.scrollTo({
                                 top: 0,
                                 behavior: 'smooth',

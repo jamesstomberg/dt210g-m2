@@ -86,6 +86,7 @@ export default function Main({ title }: { title: string }) {
                         <Form
                             setTodos={setTodos}
                             currentTodo={currentTodo}
+                            setCurrentTodo={setCurrentTodo}
                             isEditingTodo={isEditingTodo}
                             setIsEditingTodo={setIsEditingTodo}
                         />
